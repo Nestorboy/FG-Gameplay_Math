@@ -78,7 +78,7 @@ public:
 
 		if (IsIntersecting)
 		{
-			ContactPoint = Diff.GetSafeNormal() * R2;
+			ContactPoint = P2 + Diff.GetSafeNormal() * R2;
 		}
 		
 		return IsIntersecting;
@@ -91,11 +91,11 @@ public:
 		FVector& ContactPoint)
 	{
 		const float DistanceToPlane = SphereCenter.Dot(PlaneNormal) - PlaneCenter.Dot(PlaneNormal);
-		const bool IsIntersecting = DistanceToPlane <= SphereRadius * SphereRadius;
+		const bool IsIntersecting = DistanceToPlane <= SphereRadius;
 
 		if (IsIntersecting)
 		{
-			ContactPoint = SphereCenter - PlaneNormal * FMath::Sqrt(DistanceToPlane);
+			ContactPoint = SphereCenter - PlaneNormal * DistanceToPlane;
 		}
 		
 		return IsIntersecting;
